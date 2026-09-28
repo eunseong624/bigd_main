@@ -1,12 +1,20 @@
 """
+<<<<<<< HEAD
 종목 하나의 현재가를 네이버 API로 조회해 텔레그램 메시지로 보내는 스크립트.
 
 지난주에는 "안녕하세요" 같은 고정된 문구를 보냈지만, 이번 주부터는 **조회해서 얻은 값**을
 메시지에 담아 보낸다. 관심종목을 여러 개로 늘리는 것은 다음에 한다.
+=======
+내가 만든 텔레그램 봇으로 메시지를 보내보는 첫 스크립트.
+
+먼저 telebot.py로 TELEGRAM_CHAT_ID를 알아내 .env에 적어 둔 다음 이 파일을 실행하면,
+봇이 내 텔레그램으로 메시지를 보낸다. 아직 주가는 다루지 않는다 — 보내는 통로부터 만든다.
+>>>>>>> 5d752a5519af42587268ab7943e32e2f42ecf37a
 
 `python notify_stock_price.py`로 직접 실행한다.
 """
 import os
+<<<<<<< HEAD
 import time
 import requests
 from dotenv import load_dotenv
@@ -14,12 +22,18 @@ from dotenv import load_dotenv
 # 조회할 종목코드. 지금은 여기 직접 적어 두고, 나중에 파일에서 읽어오도록 바꾼다.
 STOCK_CODE = "005930"  # 삼성전자
 
+=======
+import requests
+from dotenv import load_dotenv
+
+>>>>>>> 5d752a5519af42587268ab7943e32e2f42ecf37a
 load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 
+<<<<<<< HEAD
 def fetch_naver_current_price(code: str, retries: int = 2) -> dict:
     """네이버 금융 비공식 API로 종목의 현재가(장중) 또는 최근 종가(장마감)를 조회합니다.
 
@@ -88,6 +102,8 @@ def fetch_naver_current_price(code: str, retries: int = 2) -> dict:
     return None
 
 
+=======
+>>>>>>> 5d752a5519af42587268ab7943e32e2f42ecf37a
 def send_telegram_message(text: str) -> bool:
     """텔레그램 sendMessage API로 텍스트 메시지를 전송합니다."""
     # 텔레그램 Bot API는 "https://api.telegram.org/bot{토큰}/{기능이름}" 형태의 URL로 호출한다.
@@ -97,12 +113,17 @@ def send_telegram_message(text: str) -> bool:
     data = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"}
     try:
         response = requests.post(url, data=data, timeout=15)
+<<<<<<< HEAD
+=======
+        #(예: 정상 성공은 200, 잘못된 요청은 400, 서버 권한 오류는 401 등)
+>>>>>>> 5d752a5519af42587268ab7943e32e2f42ecf37a
         return response.status_code == 200
     except Exception as e:
         print(f"❌ 텔레그램 메시지 전송 중 오류 발생: {e}")
         return False
 
 
+<<<<<<< HEAD
 def format_rate_badge(price: int, rate: float) -> str:
     """가격과 등락률(%)을 "가격원 세모이모지 부호율%" 형태의 문자열로 변환합니다
     (예: "254,000원 🔺 +1.2%", "254,000원 ▼ -0.5%"). 세모 이모지 바로 앞에 가격 숫자를
@@ -130,3 +151,9 @@ else:
         print("✅ 현재가 메시지를 텔레그램으로 전송했습니다!")
     else:
         print("❌ 현재가 메시지 전송에 실패했습니다.")
+=======
+if send_telegram_message("안녕하세요! 제 봇이 보낸 첫 메시지입니다 🎉"):
+    print("✅ 텔레그램으로 메시지를 전송했습니다!")
+else:
+    print("❌ 메시지 전송에 실패했습니다. 토큰과 CHAT_ID를 다시 확인해 주세요.")
+>>>>>>> 5d752a5519af42587268ab7943e32e2f42ecf37a
