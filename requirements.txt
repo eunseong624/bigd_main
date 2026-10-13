@@ -1,2 +1,4 @@
-requests
-python-dotenv
+requests # http 요청 받아올때
+python-dotenv # env파일에 토근,아이디 가져올때
+pandas # 판다스 쓸때
+matplotlib # 그래프 그릴때
